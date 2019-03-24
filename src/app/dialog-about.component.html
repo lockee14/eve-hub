@@ -1,0 +1,12 @@
+<div>
+    <button id='close-cross' mat-button mat-icon-button (click)="onNoClick()"><mat-icon>close</mat-icon></button>
+    <div id='about'>
+        <p i18n="@@aboutP1">
+                {{'aboutP1' | translate}}
+        </p>
+        <p i18n="@@aboutP2">
+                {{'aboutP2' | translate}}
+        </p>
+    </div>
+    <button i18n="@@aboutClose" id='close-button' mat-button (click)="onNoClick()">{{'aboutClose' | translate}}</button>
+</div>

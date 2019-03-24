@@ -1,0 +1,9 @@
+#supercontenaire {
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 100%;
+  width: 100%;
+  height: 400px;
+}

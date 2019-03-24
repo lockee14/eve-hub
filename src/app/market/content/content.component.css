@@ -1,0 +1,43 @@
+li {
+  list-style-type:none;
+  margin:0;
+}
+
+.mat-tab-label, .mat-tab-link {
+  color: #ffffff;
+}
+
+@media (min-width: 600px) {
+  #market-grid-container {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-gap: 1px;
+    margin:8px;
+  }
+}
+
+@media (max-width: 600px) {
+  #market-grid-container {
+    display: grid;
+    grid-gap: 1px;
+    margin:8px;
+  }
+
+  #right-part {
+    height: 400px;
+  }
+}
+
+#region-container {
+  display: inline;
+  padding: 0px;
+  margin: 0px;
+}
+
+#right-part {
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+#searchbox mat-form-field {
+  width: 100%;
+}

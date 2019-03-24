@@ -1,0 +1,12 @@
+table {
+    width: 100%;
+    background-color: #1f4c60;
+}
+
+.mat-header-cell {
+    color: rgba(255, 255, 255, 0.54);
+}
+
+.mat-cell {
+    color: rgba(255, 255, 255, 0.87);
+}

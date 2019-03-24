@@ -1,0 +1,47 @@
+<div id=market-grid-container>
+  <div id=left-part>
+    <div id=region-container>
+      <mat-form-field>
+        <mat-select i18n-placeholder="@@marketRegionPlaceholder" placeholder="{{'marketRegionPlaceholder' | translate}}" [compareWith]="byId" [(ngModel)]="i18n_selectedRegion">
+          <mat-option *ngFor="let region of i18n_regions | keyvalue" [value]="region.key">
+            {{region.value[lang$ | async] ? region.value[lang$ | async] : region.value["en-us"]}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div id=searchbox>
+      <form>
+        <mat-form-field class="example-full-width">
+          <input #searchBox id="search-box" type="text" i18n-placeholder="marketSearchItemPlaceholder" placeholder="{{'marketSearchItemPlaceholder' | translate}}" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search(searchBox.value)">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let item of items$ | async" [value]="item.name[lang$ | async]" routerLink="{{selectedView$ | async}}/{{i18n_selectedRegion}}/{{item.id}}" (click)="scrollDown()">
+              <a routerLink="{{selectedView$ | async}}/{{i18n_selectedRegion}}/{{item.id}}">{{item.name[lang$ | async]}}</a>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+    </div>
+
+    <li>
+      <app-collapsible-component *ngFor="let marketGroup of marketGroups" [marketGroup]="marketGroup" [region]="i18n_selectedRegion"></app-collapsible-component>
+    </li>
+
+  </div>
+  <div id=right-part>
+    <div *ngIf="childItem|async; else elseBlock">
+      <nav mat-tab-nav-bar>
+        <a i18n="@@marketTab1" mat-tab-link routerLink="chart/{{childRegion|async}}/{{childItem|async}}">{{'marketTab1' | translate}}</a>
+        <a i18n="@@marketTab2" mat-tab-link routerLink="buy/{{childRegion|async}}/{{childItem|async}}">{{'marketTab2' | translate}}</a>
+        <a i18n="@@marketTab3" mat-tab-link routerLink="sell/{{childRegion|async}}/{{childItem|async}}">{{'marketTab3' | translate}}</a>
+      </nav>
+    </div>
+    <ng-template #elseBlock>
+      <nav mat-tab-nav-bar>
+        <a i18n="@@reMarketTab1" mat-tab-link>{{'marketTab1' | translate}}</a>
+        <a i18n="@@reMarketTab2" mat-tab-link>{{'marketTab2' | translate}}</a>
+        <a i18n="@@reMarketTab3" mat-tab-link>{{'marketTab3' | translate}}</a>
+      </nav>
+    </ng-template>
+  <router-outlet></router-outlet>
+  </div>
+</div>

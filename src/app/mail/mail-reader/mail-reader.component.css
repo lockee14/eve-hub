@@ -1,0 +1,54 @@
+.mat-expansion-panel {
+    background-color: lightslategray;
+    width: 100%;
+    right:0px;
+}
+
+#moreMail{
+    background-color: lightslategray;
+    color: rgba(0, 0, 0, 0.87);
+    width: 100%;
+}
+
+.mat-checkbox {
+    margin: 0px 1% 0px 2%;
+}
+
+.mat-list-item {
+    width:90%;
+}
+
+#mail-header {
+    color: rgba(0, 0, 0, 0.87);
+    
+}
+
+.header-content {
+    width:100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.arrow-icon {
+    color: rgba(0, 0, 0, 0.54);
+    position: absolute;
+    right: 2%;
+    margin-top: 10px;
+}
+
+.mat-expansion-panel-header {
+    padding: 0px;
+}
+
+.mat-spinner {
+    margin: auto;
+    margin-top: 10%;
+}
+
+#mail-content {
+    min-height: 200px;
+}
+
+#dialog-box {
+    overflow: hidden;
+}

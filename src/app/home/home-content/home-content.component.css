@@ -1,0 +1,12 @@
+@font-face { 
+    font-family: eve-alpha;
+    src: url('/assets/font/eve-alpha.ttf');
+} 
+
+h1{
+    font-family: eve-alpha, sans-serif;
+}
+
+#home{
+    text-align: center
+}

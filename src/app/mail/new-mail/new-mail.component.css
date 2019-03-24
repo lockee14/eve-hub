@@ -1,0 +1,24 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+}
+  
+.example-container {
+    width: 100%;
+}
+
+.example-container > input{
+    width: 80%;
+}
+
+#subject {
+    width: 100%;
+}
+
+#to {
+    width: 100%;
+}
+
+#content {
+    width: 100%;
+}

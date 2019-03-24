@@ -1,0 +1,16 @@
+<button mat-button (click)="send($event)"><mat-icon>send</mat-icon><span i18n="@@mailSend">{{'mailSend' | translate}}</span></button>
+<button mat-button (click)="clear()"><mat-icon>clear</mat-icon><span i18n="@@mailClear">{{'mailClear' | translate}}</span></button>
+<div class="example-container" id="example">
+  <div [formGroup]="control" id="control">
+    <mat-form-field id="to">
+      <input matInput autocomplete="off" i18n-placeholder="@@mailRecipientPlaceholder" placeholder="{{'mailRecipientPlaceholder' | translate}}" formControlName="recipient" required>
+      <mat-error *ngIf="recipient.invalid">{{errorMsg("recipient")}}</mat-error>
+    </mat-form-field>
+    <mat-form-field id="subject">
+      <input matInput autocomplete="off" i18n-placeholder="@@mailTopicPlaceholder" placeholder="{{'mailTopicPlaceholder' | translate}}" formControlName="subject" required>
+      <mat-error *ngIf="getSubject.invalid">{{errorMsg("subject")}}</mat-error>
+    </mat-form-field>
+  </div>
+  <mat-error *ngIf="(contentError|async).error">{{(contentError|async).type}}</mat-error>
+  <textarea id="test" matInput placeholder="Textarea"></textarea>
+</div>

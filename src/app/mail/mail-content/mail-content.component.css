@@ -1,0 +1,36 @@
+#content {
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+#mail-content font size {
+    white-space: pre-line;
+}
+
+#pleaseCo {
+    font-size:18px;
+    text-align: center;
+}
+
+.mat-badge {
+    color: rgba(255, 255, 255, 0.87);
+}
+
+.mat-badge-content {
+    color: rgba(255, 255, 255, 0.87);
+}
+
+@media (min-width: 600px) {
+    #grid-container {
+        display: grid;
+        grid-template-columns: 20% 80%;
+        grid-gap: 1px;
+        margin:8px;
+    }
+}
+
+@media (max-width: 600px) {
+    #folder{
+        display: flex;
+        flex-wrap: wrap;
+    }
+}

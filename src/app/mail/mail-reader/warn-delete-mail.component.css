@@ -1,0 +1,20 @@
+.mat-tab-group{
+    text-align: center;
+}
+
+#link-input{
+    width: 100%;
+}
+
+#close-cross {
+    margin-left: 95%;
+}
+
+#warn {
+    text-align: center;
+    margin: -15% auto auto auto;
+}
+
+.mat-dialog-content{
+    overflow: hidden;
+}

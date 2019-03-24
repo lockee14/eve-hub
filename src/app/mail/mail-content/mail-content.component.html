@@ -1,0 +1,24 @@
+<div id=charactere *ngIf="isLogged$|async; else elseBlock">
+  <div id=grid-container>
+    <div id=label>
+      <button mat-button (click)="refresh()"><mat-icon>refresh</mat-icon><span i18n="@@mailRefresh">{{'mailRefresh' | translate}}</span></button>
+      <div id="folder">
+        <mat-nav-list id="folderChild" *ngFor="let label of labels$|async">
+          <a mat-list-item routerLink="/mail" (click)="setHeaders(label)">
+            <p matBadge={{label.unread_count}} [matBadgeColor]="badgeColor[label.name]" matBadgeOverlap="false">
+              {{label.name}}
+            </p>
+          </a>
+        </mat-nav-list>
+      </div>
+    </div>
+    <div id=content>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+<ng-template #elseBlock>
+  <p id=pleaseCo i18n="@@mailPleaseCo">{{'mailPleaseCo' | translate}}</p>
+</ng-template>
+
+

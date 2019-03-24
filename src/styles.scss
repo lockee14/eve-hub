@@ -1,0 +1,66 @@
+/* You can add global styles to this file, and also import other style files */
+/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+
+@import './theme.scss';
+@import './default.min.scss';
+
+body {
+    background-color: #1f4c60;
+    /*slategrey*/
+    font-family: Roboto,sans-serif;
+    margin: 0px;
+    color: #ffffff;
+    // #E4F1FE
+}
+
+.about-dialog-box .mat-dialog-container{
+    overflow: hidden;
+    background-color: #1f4c60;
+    color:#ffffff;
+    /*slategrey*/
+    font-size: 18px;
+    margin: auto;
+    font-family: Roboto,sans-serif;
+    border-radius: 2px;
+    padding: 0 24px;
+}
+
+.dialog-box .mat-dialog-container{
+    overflow: hidden;
+    /*slategrey*/
+    font-family: Roboto,sans-serif;
+    border-radius: 2px;
+    padding: 0 24px;
+}
+/* dialog-box in appraisal*/
+
+.warn-mail-dialog-box .mat-dialog-container{
+    overflow: hidden;
+    font-family: Roboto,sans-serif;
+    background-color: #1f4c60;
+    color:#ffffff;
+    font-size: 18px;
+    margin: auto;
+    text-align: center;
+    border-radius: 2px;
+    padding: 0 24px;
+}
+
+snack-bar-container.snackbartheme {
+    background: #f44336;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-label {
+    // for form field placeholder
+    color: rgba(255, 255, 255, 0.54) !important;
+}
+  
+.mat-select-value-text {
+    // for form field placeholder
+    color: rgba(255, 255, 255, 0.87) !important;
+}
+
+.mat-tab-label-content {
+    color: rgba(0, 0, 0, 1);
+    font-size: 1.3em;
+}

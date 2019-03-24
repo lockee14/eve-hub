@@ -1,0 +1,40 @@
+ul {
+  list-style-type:none;
+}
+
+li {
+  margin-left: 5%;
+  margin-top: -2.5%;
+  cursor: pointer;
+}
+
+a {
+  color:#89C4F4;
+}
+
+span:hover {
+  background-color: #315d70;
+}
+
+#img-cont{
+  margin-top: 2%;
+}
+
+#cross-honz {
+  background: black;
+  height: 2px;
+  position: relative;
+  width: 10px;
+  right: 14px;
+  top: 9px;
+}
+
+#cross-vert {
+  background: black;
+  content: "";
+  height: 10px;
+  right: 10px;
+  position: relative;
+  top: 15px;
+  width: 2px;
+}

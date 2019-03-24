@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="developmentWarning" datatype="html">
+        <source>This website is still under development feel free to browse it</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="mainTab" datatype="html">
+        <source>Market</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="mainTab2" datatype="html">
+        <source>Appraisal</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="mainTab3" datatype="html">
+        <source>Mail</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="mainTab4" datatype="html">
+        <source>About</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="disconnectButton" datatype="html">
+        <source>Disconnect</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aboutP1" datatype="html">
+        <source>
+            Welcome, evehub is a website with tools for eve-online player
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/dialog-about.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aboutP2" datatype="html">
+        <source>
+            I plan to add more features in the futur, 
+            if you have any suggestion, notice a bug or just want to ask something
+            you can contact me with an ingame mail to this character: lockee Ashar
+            or with this email: evehub.com@gmail.com
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/dialog-about.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aboutClose" datatype="html">
+        <source>Close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/dialog-about.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="mailRefresh" datatype="html">
+        <source>Refresh</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/mail/mail-content/mail-content.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="mailPleaseCo" datatype="html">
+        <source>Please login with an eve account if you want to manage your mail</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/mail/mail-content/mail-content.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="mailSend" datatype="html">
+        <source>send</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/mail/new-mail/new-mail.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="mailClear" datatype="html">
+        <source>clear</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/mail/new-mail/new-mail.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="mailRecipientPlaceholder" datatype="html">
+        <source>To: tip if you want to send your mail to multiple people type their character name separated by comma ex: bob, lisa, frank</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/mail/new-mail/new-mail.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="mailTopicPlaceholder" datatype="html">
+        <source>Topic:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/mail/new-mail/new-mail.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="mailNew" datatype="html">
+        <source>New</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/mail/mail-reader/mail-reader.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="mailDelete" datatype="html">
+        <source>Delete</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/mail/mail-reader/mail-reader.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/mail/mail-reader/mail-reader.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="mailReply" datatype="html">
+        <source>Reply</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/mail/mail-reader/mail-reader.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="mailForward" datatype="html">
+        <source>Forward</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/mail/mail-reader/mail-reader.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="mailMoreMails" datatype="html">
+        <source>more mails</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/mail/mail-reader/mail-reader.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="marketRegionPlaceholder" datatype="html">
+        <source>region:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/market/content/content.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4d035e25103edf6881967a568c96b60ff106e8e7" datatype="html">
+        <source>search item</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/market/content/content.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <note priority="1" from="description">marketSearchItemPlaceholder</note>
+      </trans-unit>
+      <trans-unit id="marketTab1" datatype="html">
+        <source>chart</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/market/content/content.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="marketTab2" datatype="html">
+        <source>buy</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/market/content/content.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="marketTab3" datatype="html">
+        <source>sell</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/market/content/content.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="reMarketTab1" datatype="html">
+        <source>chart</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/market/content/content.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="reMarketTab2" datatype="html">
+        <source>buy</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/market/content/content.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="reMarketTab3" datatype="html">
+        <source>sell</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/market/content/content.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buyVolume" datatype="html">
+        <source> Volume: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/market/buy/buy.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buyPrice" datatype="html">
+        <source> Price: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/market/buy/buy.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buyLocation" datatype="html">
+        <source> Location: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/market/buy/buy.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buyExpire" datatype="html">
+        <source> Expire in: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/market/buy/buy.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buyReceived" datatype="html">
+        <source> Received at: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/market/buy/buy.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sellVolume" datatype="html">
+        <source> Volume: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/market/sell/sell.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sellPrice" datatype="html">
+        <source> Price: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/market/sell/sell.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sellLocation" datatype="html">
+        <source> Location: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/market/sell/sell.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sellExpire" datatype="html">
+        <source> Expire in: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/market/sell/sell.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sellReceived" datatype="html">
+        <source> Received at: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/market/sell/sell.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7b15d66cc123e71dab5634e56ecf2fad9220124f" datatype="html">
+        <source>region:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-content/appraisal-content.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <note priority="1" from="description">appraisalRegionPlaceholder</note>
+      </trans-unit>
+      <trans-unit id="appraisalClear" datatype="html">
+        <source>Clear</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-content/appraisal-content.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalSubmit" datatype="html">
+        <source>Submit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-content/appraisal-content.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b9b0470db1f8394781d8ed89d47505912e205dcf" datatype="html">
+        <source>input your text here</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-content/appraisal-content.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <note priority="1" from="description">appraisalItemFieldPlaceholder</note>
+      </trans-unit>
+      <trans-unit id="appraisalEstimatedIn" datatype="html">
+        <source>Estimated in</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/appraisal-result.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalTotalBuying" datatype="html">
+        <source>Total buying price:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/appraisal-result.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalTotalSelling" datatype="html">
+        <source>Total selling price:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/appraisal-result.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalTotalVolume" datatype="html">
+        <source>Total volume:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/appraisal-result.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalLinkExports" datatype="html">
+        <source>Appraisal link/exports</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/appraisal-result.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalOriginPrice" datatype="html">
+        <source>Original prices</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/appraisal-result.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalCurrentPrice" datatype="html">
+        <source>Current prices</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/appraisal-result.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalQty" datatype="html">
+        <source>Qty</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/appraisal-result.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalItem" datatype="html">
+        <source>Item</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/appraisal-result.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalSellPrice" datatype="html">
+        <source>Selling price</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/appraisal-result.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalBuyPrice" datatype="html">
+        <source>Buying price</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/appraisal-result.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalTotSellPrice" datatype="html">
+        <source>Total selling price</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/appraisal-result.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalTotBuyPrice" datatype="html">
+        <source>Total buying price</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/appraisal-result.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalIskm3Sell" datatype="html">
+        <source>Isk/m3 for sell</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/appraisal-result.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalIskm3Buy" datatype="html">
+        <source>Isk/m3 for buy</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/appraisal-result.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalRegion" datatype="html">
+        <source>Region:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/appraisal-result.component.html</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalSystem" datatype="html">
+        <source>System:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/appraisal-result.component.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalLink" datatype="html">
+        <source>Appraisal link:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/dialog-template.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appraisalClose" datatype="html">
+        <source>Close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/appraisal/appraisal-result/dialog-template.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

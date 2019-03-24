@@ -1,0 +1,117 @@
+<div *ngIf="hasData"> 
+  <div id=appraisal-summary>
+      <span> <span i18n="@@appraisalEstimatedIn">{{'appraisalEstimatedIn' | translate}}</span> {{appraisalRegion}} {{appraisalDate | date:'short'}}</span><br> 
+      <span> <span i18n="@@appraisalTotalBuying">{{'appraisalTotalBuying' | translate}}</span> {{totalBuy | currency:'':''}} ISK </span><br>
+      <span> <span i18n="@@appraisalTotalSelling">{{'appraisalTotalSelling' | translate}}</span> {{totalSell | currency:'':''}} ISK </span><br>
+      <span> <span i18n="@@appraisalTotalVolume">{{'appraisalTotalVolume' | translate}}</span> {{totalVolume | currency:'':'':'1.0-5'}} m^3</span>
+    <button mat-button (click)="openDialog()"><mat-icon>file_copy</mat-icon><span i18n="@@appraisalLinkExports">{{'appraisalLinkExports' | translate}}</span></button>
+    <button *ngIf="currentData; else currentPriceBlock" mat-button (click)="getOldPrices()">
+      <mat-icon>undo</mat-icon> <span i18n="@@appraisalOriginPrice">{{'appraisalOriginPrice' | translate}}</span>
+    </button>
+    <ng-template #currentPriceBlock>
+      <button mat-button (click)="getCurrentPrices()">
+        <mat-icon>refresh</mat-icon> <span i18n="@@appraisalCurrentPrice">{{'appraisalCurrentPrice' | translate}}</span>
+      </button>
+    </ng-template>
+  </div>
+  <div id=table-description>
+    <div id=left-description>
+      <span i18n="@@appraisalQty" class=align id=marg>Qty</span>
+      <span i18n="@@appraisalItem">Item</span>
+    </div>
+    <div id=right-description>
+      <span>Volume</span>
+      <span><span i18n="@@appraisalBuyPrice">{{'appraisalBuyPrice' | translate}}</span> <br> <span i18n="@@appraisalSellPrice">{{'appraisalSellPrice' | translate}}</span></span>
+      <span><span i18n="@@appraisalTotBuyPrice">{{'appraisalTotBuyPrice' | translate}}</span> <br> <span i18n="@@appraisalTotSellPrice">{{'appraisalTotSellPrice' | translate}}</span></span>
+      <span><span i18n="@@appraisalIskm3Buy">{{'appraisalIskm3Buy' | translate}}</span> <br> <span i18n="@@appraisalIskm3Sell">{{'appraisalIskm3Sell' | translate}}</span></span>
+    </div>
+  </div>
+</div>
+<div *ngFor="let appraisal of appraisals$|async">
+  <mat-accordion *ngIf="!appraisal.error; else errorBlock">
+    <mat-expansion-panel (click)="initBestPrices(appraisal.name.en, appraisal.id, appraisal.regionId, appraisal.volume, appraisal.quantity)">      
+      <mat-expansion-panel-header>
+        <div class=grid-container>
+          <mat-panel-title>
+            <span id=title-grid-container>
+              <span class=align>{{appraisal.quantity}}</span> 
+              <img src="https://image.eveonline.com/Type/{{appraisal.id}}_32.png" alt="{{appraisal.name.en}}">
+              <a id=link href="https://eve-hub.com/market/chart/{{appraisal.regionId}}/{{appraisal.id}}" (click)="$event.stopPropagation();">{{appraisal.name.en}}</a>
+            </span>
+          </mat-panel-title>
+          <mat-panel-description>
+            <div class=description-grid-container>
+              <span>{{appraisal.volume | currency:'':'':'1.0-5'}}</span>
+              <span>{{appraisal.price.buy | currency:'':''}}<br> {{appraisal.price.sell | currency:'':''}}</span>
+              <span>{{appraisal.totalBuyPrice | currency:'':''}}<br> {{appraisal.totalSellPrice | currency:'':''}}</span>
+              <span>{{appraisal.buyIskPerVol | currency:'':''}}<br> {{appraisal.sellIskPerVol | currency:'':''}}</span>
+            </div>
+          </mat-panel-description>
+        </div>
+      </mat-expansion-panel-header>
+      <div>
+        <span class=grid-container>
+          <div class=bestPriceLocation>
+            <span i18n="@@appraisalRegion">{{'appraisalRegion' | translate}}</span>
+            <span i18n="@@appraisalSystem">{{'appraisalSystem' | translate}}</span>
+          </div>
+          <div></div>
+        </span>
+        <div *ngIf="loaded[appraisal.name.en]; else loading">
+          <div *ngFor="let bestPrice of bestPrice$[appraisal.name.en]|async">
+              <div class=grid-container>
+                <div class=bestPriceLocation>
+                  <span style="margin-top: 10px;">
+                    <a id=link href="https://eve-hub.com/market/chart/{{bestPrice.regionId}}/{{bestPrice.itemId}}" (click)="$event.stopPropagation();">{{bestPrice.region}}</a>
+                  </span>
+                  <span>
+                    <span>
+                      <span [innerHTML]="bestPrice.sellSystem.security_status | number:'1.0-1' | securityLevelColor"></span>
+                      <a id=link href="https://eve-hub.com/market/sell/{{bestPrice.regionId}}/{{bestPrice.itemId}}" (click)="$event.stopPropagation();">{{bestPrice.sellSystem.name}}</a>
+                      <br>
+                      <span [innerHTML]="bestPrice.buySystem.security_status | number:'1.0-1' | securityLevelColor"></span>
+                      <a id=link href="https://eve-hub.com/market/buy/{{bestPrice.regionId}}/{{bestPrice.itemId}}" (click)="$event.stopPropagation();">{{bestPrice.buySystem.name}}</a>
+                    </span>   
+                  </span>
+                </div>
+                <div class=description-grid-container>
+                  <span></span>
+                  <span>{{bestPrice.buy | currency:'':''}}<br> {{bestPrice.sell | currency:'':''}}</span>
+                  <span>{{bestPrice.totalBuyPrice | currency:'':''}}<br> {{bestPrice.totalSellPrice | currency:'':''}}</span>
+                  <span>{{bestPrice.buyIskPerVol | currency:'':''}}<br> {{bestPrice.sellIskPerVol | currency:'':''}}</span>
+                </div>
+              </div>
+            </div>
+        </div>
+        <ng-template #loading>
+          <mat-spinner color="accent"></mat-spinner>
+        </ng-template>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <ng-template #errorBlock>
+    <mat-accordion>
+      <mat-expansion-panel disabled="true" id="errorPanel">
+        <mat-expansion-panel-header>
+          <div class=grid-container id=errorContent>
+            <mat-panel-title>
+              <span id=title-grid-container>
+                <span>{{appraisal.quantity}}</span> 
+                <img src="" alt="">
+                <p>{{appraisal.name}}</p>
+              </span>
+            </mat-panel-title>
+            <mat-panel-description>
+              <div class=description-grid-container>
+                <span>0</span>
+                <span>0<br> 0</span>
+                <span>0<br> 0</span>
+                <span>0<br> 0</span>
+              </div>
+            </mat-panel-description>
+          </div>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </ng-template>
+</div>

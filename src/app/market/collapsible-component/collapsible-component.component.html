@@ -1,0 +1,24 @@
+
+<li>
+  <div id="cont" *ngIf="!marketGroup.name" (click)="toggleActivate()" (click)="rotateCross($event)"> 
+    <div style="pointer-events: none;">
+      <div id="cross-vert"></div>
+      <div id="cross-honz"></div>
+    </div>
+    <img *ngIf="marketGroup.iconID; else imgElseBlock" border="0" alt="market_categorie" src="/assets/image/image_16/{{marketGroup.iconID}}.png">
+    <span>{{marketGroup.marketGroupName[lang | async] ? marketGroup.marketGroupName[lang | async] : marketGroup.marketGroupName.en}}</span> 
+  </div>
+  <span *ngIf="marketGroup.name">
+    <a routerLink="{{selectedView$ | async}}/{{region}}/{{marketGroup.id}}" (click)="scrollDown()">
+      <img id="img-cont" *ngIf="marketGroup.iconID; else imgElseBlock" border="0" alt="market_item" src="/assets/image/image_16/{{marketGroup.iconID}}.png">
+      {{marketGroup.name[itemLang | async] ? marketGroup.name[itemLang | async] : marketGroup.name.en}}
+    </a>
+  </span>
+</li>
+
+<li *ngIf="isActivated">
+  <app-collapsible-component *ngFor="let marketGroup of marketGroups" [marketGroup]="marketGroup" [region]="region">
+  </app-collapsible-component>
+</li>
+
+<ng-template #imgElseBlock><img border="0" id="img-cont" alt="market_item" src="/assets/image/image_16/0.png"></ng-template>

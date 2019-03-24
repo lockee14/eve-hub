@@ -1,0 +1,39 @@
+<mat-progress-bar id="progress-bar" mode="indeterminate" color="accent"></mat-progress-bar>
+<header id=grid-containertest>
+  <!-- <span id="devWarn" i18n="@@developmentWarning">{{'developmentWarning' | translate}}</span> -->
+  <div id=grid-container>
+    <div id="navbar">
+        <mat-nav-list>
+          <a i18n="@@mainTab0" mat-list-item routerLink="/">{{'mainTab0' | translate}}</a>
+          <a i18n="@@mainTab1" mat-list-item routerLink="/market">{{'mainTab1' | translate}}</a>
+          <a i18n="@@mainTab2" mat-list-item routerLink="/appraisal">{{'mainTab2' | translate}}</a>
+          <a i18n="@@mainTab3" mat-list-item routerLink="/mail">{{'mainTab3' | translate}}</a>
+          <a i18n="@@mainTab4" mat-list-item (click)="openDialog()">{{'mainTab4' | translate}}</a>
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon matBadge="{{lang | async}}">translate</mat-icon>
+          </button>
+          <mat-menu id="lang" #menu="matMenu" overlapTrigger="false">
+            <button mat-menu-item *ngFor="let lang of languages" (click)="changeLang(lang)">
+              <span>{{lang.lang}}</span>
+            </button>
+          </mat-menu>
+        </mat-nav-list>
+    </div>
+    <div id="log" *ngIf="characterData.CharacterID; else elseBlock">
+      <div id="is-logged">
+        <img border="0" alt="eve-online-charactere" src="https://image.eveonline.com/Character/{{characterData.CharacterID}}_32.jpg">
+        <br><span>{{characterData.CharacterName}}</span>
+        <br><a id="disconnect" i18n="@@disconnectButton" (click)="disconnect()" routerLink="/">{{'disconnectButton' | translate}}</a>
+      </div>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <a id="log" href="https://login.eveonline.com/oauth/authorize?response_type=code&redirect_uri=https://eve-hub.com/oauth-callback&client_id=dfcfb2bdb2494b05a61473fdf2ca3deb&scope=esi-mail.organize_mail.v1 esi-mail.read_mail.v1 esi-mail.send_mail.v1 esi-characters.read_standings.v1 esi-universe.read_structures.v1 esi-search.search_structures.v1">
+      <img border="0" alt="eve-online-connect" src="/assets/eve connect/eve-sso-login-gold-large.png">
+    </a>
+</ng-template>
+</header>
+<router-outlet></router-outlet>
+<footer>
+</footer>
+

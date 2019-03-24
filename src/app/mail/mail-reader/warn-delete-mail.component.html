@@ -1,0 +1,13 @@
+<div mat-dialog-content>
+    <button id='close-cross' mat-button mat-icon-button (click)="onNoClick()"><mat-icon>close</mat-icon></button>
+    <div id='warn'>
+        <h3>{{'mailDeleteWarn' | translate}}</h3>
+        <div>
+            <button mat-button (click)="choice(true)">{{'yes' | translate}}</button>
+            <button mat-button (click)="choice(false)">{{'no' | translate}}</button>
+        </div>
+
+        <mat-checkbox (click)="dontShowAgain()">{{'mailDoNotShow' | translate}}</mat-checkbox>
+    </div>
+    <button i18n="@@appraisalClose" id='close-button' mat-button (click)="onNoClick()">{{'appraisalClose' | translate}}</button>
+</div>

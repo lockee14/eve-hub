@@ -1,0 +1,18 @@
+<div id=grid-container>
+  <div id=left-part>
+    <mat-form-field>
+      <mat-select i18n-placeholder="appraisalRegionPlaceholder" placeholder="{{'appraisalRegionPlaceholder' | translate}}" [compareWith]="byId" [(ngModel)]="i18n_selectedRegion">
+        <mat-option *ngFor="let region of i18n_regions | keyvalue" [value]="region.key">
+          {{region.value[lang | async]}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button i18n="@@appraisalClear" mat-button (click)="clear()">{{'appraisalClear' | translate}}</button>
+    <button i18n="@@appraisalSubmit" mat-button (click)="submit()">{{'appraisalSubmit' | translate}}</button>
+    <mat-error *ngIf="(contentError|async).error">{{(contentError|async).type}}</mat-error>
+    <textarea id="itemfield" i18n-placeholder="appraisalItemFieldPlaceholder" placeholder="{{'appraisalItemFieldPlaceholder' | translate}}"></textarea>
+  </div>
+  <div id=right-part>
+    <app-appraisal-result></app-appraisal-result>
+  </div>
+</div>

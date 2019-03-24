@@ -1,0 +1,14 @@
+<div mat-dialog-content>
+    <button id='close-cross' mat-button mat-icon-button (click)="onNoClick()"><mat-icon>close</mat-icon></button>
+    <span i18n="@@appraisalLink">{{'appraisalLink' | translate}}</span>
+    <input type="text" class="form-control" id="link-input" value="http://localhost:4200/appraisal/{{data.hash}}">
+    <mat-tab-group>
+        <mat-tab label="Raw">
+          <textarea class="data-area" disabled="true" id="json-data">{{data.raw}}</textarea>
+        </mat-tab>
+        <mat-tab label="Json">
+          <textarea class="data-area" disabled="true" id="json-data">{{data.json}}</textarea>
+        </mat-tab>
+    </mat-tab-group>
+    <button i18n="@@appraisalClose" id='close-button' mat-button (click)="onNoClick()">{{'appraisalClose' | translate}}</button>
+</div>
