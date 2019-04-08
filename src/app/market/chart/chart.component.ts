@@ -8,7 +8,8 @@ import { SharedMarketDataService } from '../shared-market-data.service';
 import { DataProviderService } from './../../data-provider.service';
 import { createElement } from '@angular/core/src/view/element';
 
-declare var chartlib_canvas: any;
+// declare var initialisation: any; // ancienne version de chartlib fait en javascript avec svg
+declare var chartlib_canvas: any; // nouvelle version de chartlib fait en typescript avec canvas
 
 @Component({
   selector: 'app-chart',
@@ -37,7 +38,7 @@ export class ChartComponent implements OnInit, OnDestroy {
     this.fetchData();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy() { // remove add event listener from chartlib_canvas
     this.subscription.forEach(sub => {
       sub.unsubscribe();
     });

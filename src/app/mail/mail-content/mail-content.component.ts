@@ -24,7 +24,7 @@ export class MailContentComponent implements OnInit, OnDestroy {
 
   constructor(
     private sharedMailDataService: SharedMailDataService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute, // >> get paramMap method return un observable de urlparametre
     private router: Router,
   ) { }
 
@@ -54,7 +54,7 @@ export class MailContentComponent implements OnInit, OnDestroy {
     this.sharedMailDataService.setHeaders(label);
   }
 
-  refresh() {
+  refresh() { // inclure un truc pour diminué le taux de rafraichissement, toutes les 30sec ou minute
     if (this.refreshTimer) {
       this.refreshTimer = false;
       this.getMailHeader();

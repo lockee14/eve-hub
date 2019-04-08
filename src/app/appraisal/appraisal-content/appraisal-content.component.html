@@ -2,8 +2,12 @@
   <div id=left-part>
     <mat-form-field>
       <mat-select i18n-placeholder="appraisalRegionPlaceholder" placeholder="{{'appraisalRegionPlaceholder' | translate}}" [compareWith]="byId" [(ngModel)]="i18n_selectedRegion">
+        <!-- <mat-option *ngFor="let region of regions" [value]="region"> -->
         <mat-option *ngFor="let region of i18n_regions | keyvalue" [value]="region.key">
+
+          <!-- {{region.name}} -->
           {{region.value[lang | async]}}
+          <!-- {{region.value[lang | async] ? region.value[lang | async] : region.value["en-us"]}} -->
         </mat-option>
       </mat-select>
     </mat-form-field>

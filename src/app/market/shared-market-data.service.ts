@@ -25,7 +25,7 @@ export class SharedMarketDataService {
   public marketHistory$ = this.marketHistory.asObservable().pipe(share());
   public marketBuyOrders$ = this.marketBuyOrders.asObservable().pipe(share());
   public marketSellOrders$ = this.marketSellOrders.asObservable().pipe(share());
-  public selectedView$ = this.selectedView.asObservable();
+  public selectedView$ = this.selectedView.asObservable(); // .pipe(share()); // le share() empeche les urls de se mettre à jour dans collapsible component
 
   private locationIdObservable$ = [];
   private systemsIdObservable$ = [];
@@ -53,9 +53,22 @@ export class SharedMarketDataService {
     this.selectedView.next(data);
   }
 
- refactorOrderData(data: any) {
+  /*
+    le problem:
+      data est un array contenant les données relatives à chaque ordre d'achat/vente
+      néanmoins plusieurs ordre peuvent provenir de la même station/region
+      donc ce que je veux faire:
+        n'envoyé de requete que une fois par stations/regions puis distribuer les resultat aux ordres associé
+      la solution:
+        deja traiter achat et vente de la même maniere car si je les separe des requete seraient redondente
+        ne les séparer qu'au dernier moment avant next(data)
+        crée un object de type obj = {locationId: [array des ordre contenant ce locationId (ou leurs index)]}
+        iteré sur la reponse puis sur obj en fonction de obj[reponse[i].locationId].foreach
+  */
+
+ refactorOrderData(data: any) { // ça à l'air de fonctionner non caca ça ne fonctionne pas
     const dataLength = data.length;
-    const associativObj = {};
+    const associativObj = {};  // associate systemId to stationId and then to data index
     const sellOrder = [];
     const buyOrder = [];
     this.systemsIdObservable$ = [];
@@ -100,7 +113,7 @@ export class SharedMarketDataService {
 
     const systemsData = zip(...this.systemsIdObservable$);
     const stationsData = zip(...this.locationIdObservable$);
-    this.subscription = zip(systemsData, stationsData).subscribe((res: any) => {
+    this.subscription = zip(systemsData, stationsData).subscribe((res: any) => { // pour les structure utiliser le search service
       res[0].forEach(regionData => {
         res[1].forEach(stationData => {
           if (associativObj[regionData.system_id] !== undefined &&associativObj[regionData.system_id][stationData.station_id] !== undefined) {
@@ -120,7 +133,6 @@ export class SharedMarketDataService {
           }
         });
       });
-      console.log('shared market data: provide sell and buy order');
       this.marketSellOrders.next(sellOrder);
       this.marketBuyOrders.next(buyOrder);
       this.subscription.unsubscribe();

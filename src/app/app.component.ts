@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { Component, OnInit } from '@angular/core'; // modifié
+import { MatDialog, MatDialogRef } from '@angular/material';
 import {FocusMonitor} from '@angular/cdk/a11y';
 
 import { Observable, of, Subject, BehaviorSubject, timer, zip, observable, Subscriber, Subscription } from 'rxjs';
@@ -9,9 +9,9 @@ import { ApiHandlerService } from './api-handler.service';
 import { DataProviderService } from './data-provider.service';
 import { InterceptorService, LoadBarService, HttpErrorService } from './interceptor.service';
 
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -21,9 +21,9 @@ import {TranslateService} from '@ngx-translate/core';
 
 export class AppComponent implements OnInit { // modifié
 
-  cookieObj: any = {};
+  cookieObj: any = {}; // contient mon cookie // utiliser tout le cookie est il pertinant?
   userData: any = {};
-  characterData: any = {};
+  characterData: any = {}; // contient les donnée utilisateur characterId, charatere name etc
   accessTokenExpirationTimer: Subscription;
   private progressBar: HTMLElement;
   public languages: any = [
@@ -48,7 +48,7 @@ export class AppComponent implements OnInit { // modifié
   ) { }
 
   ngOnInit() {
-    this.parseCookie();
+    this.parseCookie(document.cookie);
 
     this.lang = this.dataProviderService.lang$.pipe(
       map(x => x === 'en-us' ? 'en' : x)
@@ -56,9 +56,10 @@ export class AppComponent implements OnInit { // modifié
     this.translate.addLangs(['en-us', 'fr', 'de', 'ru', 'ja', 'zh']);
     this.translate.setDefaultLang('en-us');
 
-    if  (this.cookieObj.userLanguage) {
+    if (this.cookieObj.userLanguage) {
       this.translate.use(this.cookieObj.userLanguage);
-      this.dataProviderService.lang.next(this.cookieObj.userLanguage);
+      // this.dataProviderService.lang.next(this.cookieObj.userLanguage);
+      this.dataProviderService.setLang(this.cookieObj.userLanguage);
     } else {
       this.translate.use('en-us');
     }
@@ -88,7 +89,9 @@ export class AppComponent implements OnInit { // modifié
 
     if (this.cookieObj.hasOwnProperty('mailPreference')) {
       const mailPreference = JSON.parse(decodeURIComponent(this.cookieObj.mailPreference));
-      this.dataProviderService.mailPreference.next(mailPreference);
+      // this.dataProviderService.mailPreference.next(mailPreference);
+      this.dataProviderService.setMailPreference(mailPreference);
+
     }
   }
 
@@ -100,8 +103,8 @@ export class AppComponent implements OnInit { // modifié
     });
   }
 
-  parseCookie(): void {
-    const allCookie: string = document.cookie;
+  parseCookie(allCookie: string): void {
+    // const allCookie: string = document.cookie;
     const cookieArray: string[] = allCookie.split('; ');
     const cookieArrayLength: number = cookieArray.length;
     let cookie: string[];
@@ -111,7 +114,7 @@ export class AppComponent implements OnInit { // modifié
     }
   }
 
-  generateTimer(userData, currentTime): void {
+  generateTimer(userData: any, currentTime: number): void {
     const timeDif = Math.ceil(currentTime - userData.timeCreation);
     const time = (userData.expires_in - timeDif) * 1000;
     this.accessTokenExpirationTimer = timer(time).subscribe(() => this.getRefreshToken(userData));
@@ -121,7 +124,7 @@ export class AppComponent implements OnInit { // modifié
     this.apiHandlerService.getUserData(cookieData).pipe(
       catchError( err => of(`error: ${err}`))
     ).subscribe(data => {
-      if (data.userData.hasOwnProperty('access_token')) {
+      if ((typeof data === 'object') && data.userData.hasOwnProperty('access_token')) {
         this.characterData = data.characterData;
         this.userData = data.userData;
         this.dataProviderService.setCharacterData(data.characterData);
@@ -133,15 +136,15 @@ export class AppComponent implements OnInit { // modifié
           this.getRefreshToken(data.userData);
         }
       } else {
-        // raise an error if no access token
+        // ne contient pas l'access_token raise an error
         const err = {status: 626};
         this.interceptorService.handleAuthError(err);
       }
     });
   }
 
-  getRefreshToken(userData): void {
-    const currentTime = new Date().getTime() / 1000;
+  getRefreshToken(userData: any): void {
+    const currentTime: number = new Date().getTime() / 1000;
     this.apiHandlerService.getRefreshToken(userData.refresh_token).pipe(
       catchError( err => of(`error: ${err}`))
     ).subscribe(data => {
@@ -163,7 +166,8 @@ export class AppComponent implements OnInit { // modifié
 
   changeLang(lang): void {
     this.translate.use(lang.short);
-    this.dataProviderService.lang.next(lang.short);
+    // this.dataProviderService.lang.next(lang.short);
+    this.dataProviderService.setLang(lang.short);
     document.cookie = `userLanguage=${lang.short}; expires=Thu, 01 Jan 2050 00:00:01 GMT;path=/`;
   }
 }
@@ -178,7 +182,7 @@ export class DialogAboutComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<DialogAboutComponent>,
     private focusMonitor: FocusMonitor
-    ) {}
+  ) {}
 
   ngOnInit() {
     this.focusMonitor.stopMonitoring(document.getElementById('close-cross'));

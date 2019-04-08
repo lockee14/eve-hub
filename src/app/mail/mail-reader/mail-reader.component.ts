@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {FocusMonitor} from '@angular/cdk/a11y';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+// import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Observable, Subscription, of, Subject, BehaviorSubject, timer, zip, from, forkJoin} from 'rxjs';
 import { catchError, map, tap, first, distinctUntilChanged, switchMap, mergeMap, merge, concat, take} from 'rxjs/operators';
@@ -9,6 +10,11 @@ import { catchError, map, tap, first, distinctUntilChanged, switchMap, mergeMap,
 import { SharedMailDataService } from './../shared-mail-data.service';
 import { DataProviderService } from './../../data-provider.service';
 
+/*
+pour plus tard, mettre cette interface dans fichier separer (pour pouvoir l'importer ailleurs)
+verifier qu'elle est correcte
+faire les autres
+*/
 interface Header {
     from: {
       ancestry_id?: number;
@@ -37,7 +43,7 @@ interface Header {
   selector: 'app-mail-reader',
   templateUrl: './mail-reader.component.html',
   styleUrls: ['./mail-reader.component.css'],
-  animations: [
+  animations: [ // for an unknow raison the transition don't work... because <mat-expansion-panel [disabled]="false">
     trigger('openClose', [
       state('open', style({
         transform: 'rotateZ(180deg)'
@@ -59,7 +65,7 @@ export class MailReaderComponent implements OnInit, OnDestroy {
   private mailTrash: any = {};
   public moreMail$: Observable<any>;
   private currentLabel$: Observable<any>;
-  public showWarning: boolean;
+  public showWarning: boolean; // get this from cookie through DataProviderService
 
   constructor(
     private sharedMailDataService: SharedMailDataService,
@@ -85,7 +91,9 @@ export class MailReaderComponent implements OnInit, OnDestroy {
       const dialogRef = this.dialog.open(DialogTemplateComponent, {
         id: 'dialog-box',
         ariaDescribedBy: 'deleteMailId',
+        // width: '35vw',
         width: '300px',
+        // height: '600px',
         panelClass: 'warn-mail-dialog-box',
         data: {delete: false}
       });
@@ -111,7 +119,7 @@ export class MailReaderComponent implements OnInit, OnDestroy {
     this.headers$ = this.sharedMailDataService.headers.asObservable().pipe(
       tap(() => {
         this.OpenSelectedMail = 0;
-      })
+      })// pour eviter qu'un mail figurant dans plusieurs label reste ouvert lors d'un changement de label
     );
 
     this.moreMail$ = this.sharedMailDataService.moreMail.asObservable();
@@ -122,9 +130,11 @@ export class MailReaderComponent implements OnInit, OnDestroy {
     this.currentLabel$.pipe(take(1)).subscribe(label => this.sharedMailDataService.setHeaders(label, label.lastMailId));
   }
 
-  getMailContent(event, mailId: number, header: Header) { 
+  getMailContent(event, mailId: number, header: Header) { // si je veux recuperer l'element qui contient le (click) >> event.currentTarget
     const regexp = /mat-checkbox+/gm;
-    if (!regexp.test(event.target.className)) {
+    const mailContent = event.currentTarget.querySelector('.mat-expansion-panel-content');
+    const contain = mailContent.contains(event.target);
+    if (!regexp.test(event.target.className) && !contain) { // pourquoi je fais ça deja? pour ne pas trigger le panel si click sur checkbox ou le contenue
       const div = event.currentTarget.querySelector('#mail-content');
       const spinner = div.querySelector('.mat-spinner');
 
@@ -141,13 +151,17 @@ export class MailReaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  private mailParser(body) {
+  private mailParser(body) { // ça a l'air de fonctionner correctement
     let regex: RegExp;
     body = body.replace(/<font ((size=('|"|)\d{1,2}('|"|) color=('|"|)(#\w{6,8}|\w+)('|"|))|(color=('|"|)(#\w{6,8}|\w+)('|"|) size=('|"|)\d{1,2}('|"|))|(size=('|"|)\d{1,2}('|"|)|color=('|"|)(#\w{6,8}|\w+)('|"|)))>/g, function(match) {
+      // (?:size=(?:"|'|))(\d{1,2})(?=(?:"|'|))
+      // (?<=size=("|'|))\d{1,2}(?=("|'|)) >> ?<= pose problemes car pas pris en charge par tout les navigateur
       match = match.replace(/(?:size=(?:"|'|))(\d{1,2})(?=(?:"|'|))/, (m, p1) => {
         const p = ~~p1 / 4;
         return p;
       });
+      // (?<=color=('|"|)#)\w{8}(?=('|"|)) // old
+      // (?:color=(?:'|"|)#)(\w{8})(?=(?:'|"|)) // new
       match = match.replace(/(?:color=(?:'|"|)#)(\w{8})(?=(?:'|"|))/, (m, p1) => p1.substring(2));
       return match;
     });
@@ -159,9 +173,14 @@ export class MailReaderComponent implements OnInit, OnDestroy {
         return '';
       }
     });
+    // (?<=<)url(?==(((http|ftp|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))>) // old
+    // (?:<)(url)(?==(((http|ftp|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))>) // new
     regex = /(?:<)(url)(?==(((http|ftp|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))>)/g;
-    body = body.replace(regex, '<a href=');
-    body = body.replace(/(?:<\/)(url)(?=>)/g, '</a');
+    // body = body.replace(/(?<=<)url=(?=\S+>)/g, 'a href=');
+    body = body.replace(regex, '<a href='/*'a href='*/);
+    // (?<=<\/)url(?=>) // old
+    // (?:<\/)(url)(?=>) // new
+    body = body.replace(/(?:<\/)(url)(?=>)/g, '</a'/*'a'*/);
     return body;
   }
 

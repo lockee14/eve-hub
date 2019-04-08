@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { MailService } from '../../eve-angular-client/api/mail.service';
+// import { CharacterService } from '../../eve-angular-client/api/character.service';
 import { SearchService } from '../../eve-angular-client/api/search.service';
 
 import { Observable, Subscription, of, Subject, BehaviorSubject, timer, zip, from, forkJoin} from 'rxjs';
@@ -43,10 +44,15 @@ export class NewMailComponent implements OnInit, OnDestroy {
     private mailService: MailService,
     private dataProviderService: DataProviderService,
     private searchService: SearchService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute, // >> get paramMap method return un observable de urlparametre
     private router: Router,
     ) { }
 
+  /*
+    <loc></loc> ?? c'est quoi? propre au jeux probablement, voir pour les autres type de lien: location, character etc
+    par ailleurs recupurer les code hexadecimal des autres couleurs, et voir si l'on peu mettre des custom color
+      >> possible de definir des customs color mais les faire toute moi même sinon certain comme le noir n'ont pas d'hexa (default color)
+  */
   ngOnInit() {
     this.fetchData();
     const mailData = this.sharedMailDataService.mailData;
@@ -54,8 +60,11 @@ export class NewMailComponent implements OnInit, OnDestroy {
     x.style.width = '100%';
     x.style.height = '300px';
     sceditor.create(x, {
-      format: 'bbcode',
+      // format: 'xhtml', // fonctionne mieu avec la version en xhtml >> oui mais non car casse couille à parser
+      format: 'bbcode', // pourquoi ai je fais le choix du bbcode en premier lieu? car le html est chient tag pas simple,
+        // il faudrait que je modifie le code source
       toolbar: 'bold,italic,underline,size,color,link|source',
+      // note: il est possible d'utiliser des couleurs personnalisé mais mieu vaux les faire sois même
       colors: `
       #ffffff,#b2b2b2,#4c4c4c,#000000|
       #ffff00,#00ff00,#ff0000,#0000ff|
@@ -83,7 +92,8 @@ export class NewMailComponent implements OnInit, OnDestroy {
         To: ${mailData.from},<br>
         <br>
         ${mailData.content}`;
-      sceditor.instance(x).val('\n' + content, false);
+      sceditor.instance(x).val('\n' + content, false); // le parser en bbcode
+      // sceditor.instance(x).insertText('\n' + content);
     } else {
       this.recipient = new FormControl('', [
         Validators.required,
@@ -104,6 +114,7 @@ export class NewMailComponent implements OnInit, OnDestroy {
     });
 
     function recipientLength(subject: FormGroup) {
+      // console.log(subject, subject.value, subject.get('subject'));
       const rec = subject.value.split(',');
       if (rec.length > 50) {
         return {'recipientTooLong': true};
@@ -113,6 +124,7 @@ export class NewMailComponent implements OnInit, OnDestroy {
     }
 
     function subjectLength(subject: FormGroup) {
+      // console.log(subject, subject.value, subject.get('subject'));
       if (subject.value.length >= 1000) {
         return {'subjectTooLong': true};
       } else {
@@ -152,12 +164,17 @@ export class NewMailComponent implements OnInit, OnDestroy {
   }
 
   send(event) {
-
+    /*
+      ici recuperer les character_id correspondant aux charactere name de To
+      envoyé les emails, puis update le label 'sent'
+      puis rediriger vers read 'inbox' et notifier que l'email a bien etait envoyé.
+    */
     const test = document.getElementById('test');
     const body = sceditor.instance(test).getBody();
     let textValue = sceditor.instance(test).val();
     const to = document.getElementById('to').getElementsByTagName('input')[0].value;
     const subject = document.getElementById('subject').getElementsByTagName('input')[0].value;
+    // voir la doc de sceditor pour les details de l'api
     const nameList = to.split(',');
     textValue = bbcodeParser(textValue);
     let error: boolean = false;
@@ -215,9 +232,9 @@ export class NewMailComponent implements OnInit, OnDestroy {
       ));
     });
     const sub = zip(...IdList).pipe(
-      switchMap(Id => {
+      switchMap(Id => { // ici error utiliser autre chose que switchmap?
         this.recipientError = '';
-        Id.forEach((element, i) => {
+        Id.forEach((element, i) => { // chaque element doit etre testé, si pas d'id envoyer une erreur
           if (Object.keys(element).length === 0 && Object.keys(element)[0] === undefined) {
             this.recipientError += `${nameList[i]},`;
           } else {
@@ -226,6 +243,7 @@ export class NewMailComponent implements OnInit, OnDestroy {
               recipient_type: Object.keys(element)[0]
             };
             mail.recipients.push(tempObj);
+            // mailToSend = mail;
           }
         });
         if (this.recipientError !== '') {
@@ -246,18 +264,21 @@ export class NewMailComponent implements OnInit, OnDestroy {
       })
     ).subscribe( x => {
       if (x['error'] === true) {
-        this.recipient.setErrors({noIdForRecipient: true});
+        // ici j'affiche les erreurs d'id
+        this.recipient.setErrors({noIdForRecipient: true}); // ici le type est {'type':boolean}
         this.recipient.markAsDirty();
         this.recipient.markAsTouched();
         this.control.updateValueAndValidity();
       } else {
+        // ici je notifie le succes, raffraichie le contenue de la mailbox et redirige vers inbox
         this.sharedMailDataService.getLabels();
         this.router.navigateByUrl('/mail');
       }
-    });
+    }); // ici repond avec 372780932 aka le numero de l'email 372780932 oui j'ai verifié
+    // donc dans subscribe lorsque je reçois le num le notifier et rediriger vers indox en rafraichissant les mails
     this.subscriptions.push(sub);
 
-    function bbcodeParser(content) {
+    function bbcodeParser(content) { // done? // quoi ça sert si j'utilise la version xhtml?
       content = content.replace(/\[(\/{0,1})([bui]{1})\]/g, (m, p1, p2) => {
         if (p1 === '') {
           return `<${p2}>`;
@@ -265,7 +286,7 @@ export class NewMailComponent implements OnInit, OnDestroy {
           return `</${p2}>`;
         }
       });
-      content = content.replace(/\[(color=#)(\w{6})\]|\[\/(color)\]/g, (m, p1, p2) => {
+      content = content.replace(/\[(color=#)(\w{6})\]|\[\/(color)\]/g, (m, p1, p2) => { // ici rajouté le bf si blanc ff pour le reste
         if (m === '[/color]') {
           return '</font>';
         } else {
@@ -281,6 +302,7 @@ export class NewMailComponent implements OnInit, OnDestroy {
         }
       });
       content = content.replace(/\n|\r/g, '<br>');
+      // const regex = /\[url=((?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+)\]|\[\/url\]/g;
       const regex = /\[url=(((http|ftp|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))\]|\[\/url\]/g;
       content = content.replace(regex, (m, p1) => {
         if (m === '[/url]') {

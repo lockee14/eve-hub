@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+// import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
@@ -36,6 +37,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   imports: [
     CommonModule,
+    // BrowserAnimationsModule,
     MatFormFieldModule,
     MatSelectModule,
     MatTableModule,
@@ -65,6 +67,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
   ],
   exports: [
+    // BrowserAnimationsModule,
     MatFormFieldModule,
     MatSelectModule,
     MatTableModule,

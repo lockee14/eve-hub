@@ -1,3 +1,10 @@
+/* #grid-container {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-gap: 1px;
+    margin:8px;
+  } */
+
 @media (min-width: 600px) {
     #grid-container {
         display: grid;
@@ -34,3 +41,6 @@
     border-radius: 5px;
 }
 
+/* .mat-form-field-appearance-legacy .mat-form-field-label {
+    color: rgba(255, 255, 255, 0.87) !important;
+} */

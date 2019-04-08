@@ -7,12 +7,15 @@
 }
 
 #close-cross {
+    /* position: relative; */
     margin-left: 95%;
 }
 
 #warn {
     text-align: center;
     margin: -15% auto auto auto;
+    /* margin-top: -10%; */
+    /* overflow: hidden; */
 }
 
 .mat-dialog-content{

@@ -4,6 +4,7 @@ ul {
 
 li {
   margin-left: 5%;
+  /* margin-top: -1.5%; */
   margin-top: -2.5%;
   cursor: pointer;
 }
@@ -22,17 +23,21 @@ span:hover {
 
 #cross-honz {
   background: black;
+  /* display: inline; */
   height: 2px;
   position: relative;
   width: 10px;
+  /* left: 4px; */
   right: 14px;
   top: 9px;
 }
 
 #cross-vert {
   background: black;
+  /* display: inline; */
   content: "";
   height: 10px;
+  /* left: 8px; */
   right: 10px;
   position: relative;
   top: 15px;

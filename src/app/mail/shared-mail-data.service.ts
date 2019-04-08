@@ -14,8 +14,8 @@ import { DataProviderService } from './../data-provider.service';
 
 export class SharedMailDataService implements OnDestroy {
 
-  private userData: any;
-  public characterData: any;
+  private userData: any; // plutot que de faire ça souscrire à dataProvider.cookieObj$ et recup les donnée à chaque appel de fonctions
+  public characterData: any; // idem que pour userdata?
   public headers = new BehaviorSubject<any>(null);
   public labels = new BehaviorSubject<any>(null);
   public currentLabel = new BehaviorSubject<any>(null);
@@ -32,11 +32,18 @@ export class SharedMailDataService implements OnDestroy {
     ) {
     const subUserData = this.dataProviderService.userData$;
     const subCharacterData = this.dataProviderService.characterData$;
-    this.userData$ = combineLatest(subUserData, subCharacterData);
+    // this.userData$ = zip(subUserData, subCharacterData); // .pipe(share());
+    this.userData$ = combineLatest(subUserData, subCharacterData); // .pipe(share());
     const sub = this.userData$.subscribe( data => {
+      // console.log('nouvelle valeur de userdata dans sharedMailDataService: ', data);
       this.userData = data[0];
       this.characterData = data[1];
     });
+    // const sub = this.userData$.subscribe( data => {
+    //     console.log('nouvelle valeur de userdata dans sharedMailDataService: ', data);
+    //     this.userData = data[0];
+    //     this.characterData = data[1];
+    //   });
     this.subscriptions.push(sub);
   }
 
@@ -56,14 +63,14 @@ export class SharedMailDataService implements OnDestroy {
       this.characterData.CharacterID,
       undefined, undefined,
       undefined,
-      lastMailId,
+      lastMailId, // lastMailId
       this.userData.access_token
     );
     mailHeaders$.pipe(
       map((headers: any[]) => {
         const result = [];
         for (const header in headers) {
-          if (headers[header].labels.length === 0) {
+          if (headers[header].labels.length === 0) { // mailing list n'a pas de label_id et ses mail non plus
             headers[header].labelName = 'Mailing_Lists';
             headers[header].from = {name: ''};
             result.push(headers[header]);
@@ -127,7 +134,10 @@ export class SharedMailDataService implements OnDestroy {
     );
     return mailHeaders$;
   }
-  setHeaders(label, lastMailId?: number) {
+  setHeaders(label, lastMailId?: number) { // c'est DEGUEULASSE peu mieu faire?
+    // 2 truc different un pour mailing_lists et le reste
+    // lasmailid? ou pas?
+    // console.log('setHeaders', label, lastMailId);
     let sub;
     if (label.name === 'Mailing_Lists') {
 
@@ -206,8 +216,8 @@ export class SharedMailDataService implements OnDestroy {
         };
 
         let inbox;
-        for (const label in labels) {
-          labels[label].mailHeaders = [];
+        for (const label in labels) { // a degager?
+          labels[label].mailHeaders = []; // test
           labels[label].lastMailId = null;
           labels[label].moreMail = true;
           if (labels[label]['name'] === 'Inbox') {
@@ -215,8 +225,8 @@ export class SharedMailDataService implements OnDestroy {
           }
         }
 
-        for (const header in headers) {
-          if (headers[header].labels.length === 0) {
+        for (const header in headers) { // tri les mail appartenant à des mailing_lists
+          if (headers[header].labels.length === 0) { // mailing list n'a pas de label_id et ses mail non plus
             headers[header].labelName = 'Mailing_Lists';
             headers[header].from = {name: ''};
             labels[labelsLength].mailHeaders.push(headers[header]);
@@ -233,7 +243,7 @@ export class SharedMailDataService implements OnDestroy {
     ).subscribe(data => {
       this.labels.next(data);
     });
-    this.subscriptions.push(sub);
+    this.subscriptions.push(sub); // inutile car take(1)
   }
 
   getMailContent(mailId): Observable<any> {

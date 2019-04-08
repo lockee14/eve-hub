@@ -52,7 +52,7 @@ export class AppraisalContentComponent implements OnInit, OnDestroy {
       this.contentError.next({error: true, type: 'this field is required'});
     } else if (t.value.trim() !== this.appraisal) {
       this.contentError.next({error: false, type: ''});
-      this.appraisal = t.value.trim();
+      this.appraisal = t.value.trim(); // pour verifier qu'une estimation n'a pas deja été faites
       this.appraisalService.handleData({
         id: this.i18n_selectedRegion,
         name: this.i18n_regions[this.i18n_selectedRegion][this.lang.getValue()]

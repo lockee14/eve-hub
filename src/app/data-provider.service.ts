@@ -9,13 +9,14 @@ import { catchError, map, tap, debounceTime, distinctUntilChanged, switchMap } f
 export class DataProviderService {
 
   public lang = new BehaviorSubject<any>('en-us');
-  private userData = new BehaviorSubject<any>(null);
-  private characterData = new BehaviorSubject<any>(null);
   public mailPreference = new BehaviorSubject<any>(null);
   public lang$ = this.lang.asObservable();
+  public mailPreference$ = this.mailPreference.asObservable();
+  
+  private userData = new BehaviorSubject<any>(null);
+  private characterData = new BehaviorSubject<any>(null);
   public userData$ = this.userData.asObservable();
   public characterData$ = this.characterData.asObservable();
-  public mailPreference$ = this.mailPreference.asObservable();
 
   constructor() {}
 
@@ -25,5 +26,13 @@ export class DataProviderService {
 
   setCharacterData(data: any): void {
     this.characterData.next(data);
+  }
+
+  setLang(lang: string): void {
+    this.lang.next(lang);
+  }
+
+  setMailPreference(data: any): void {
+    this.mailPreference.next(data);
   }
 }

@@ -51,8 +51,8 @@ export class AppraisalResultComponent implements OnInit, OnDestroy {
   private jsonData: string;
   private rawData: string;
 
-  private bestPrice = {};
-  private bestPrice$ = {};
+  private bestPrice = {}; // ici {xxx: new BehaviorSubject(null)}
+  private bestPrice$ = {}; // ici {xxx : this.bestPrice[xxx].asObservable()}
 
   public disabled = true;
 
@@ -76,6 +76,7 @@ export class AppraisalResultComponent implements OnInit, OnDestroy {
       id: 'dialog-box',
       ariaDescribedBy: 'testId',
       width: '50vw',
+      // height: '600px',
       panelClass: 'dialog-box',
       data: {hash: this.appraisalHash, raw: this.rawData, json: this.jsonData}
     });
@@ -215,7 +216,7 @@ export class AppraisalResultComponent implements OnInit, OnDestroy {
   fetchData() {
     this.appraisalService.appraisal$.pipe(
       tap( data => {
-        data ? this.appraisalDate = new Date(data[0].date) : null;
+        data ? this.appraisalDate = new Date(data[0].date) : null; // inutile?
       }),
       map( data => {
         if (data === null) {

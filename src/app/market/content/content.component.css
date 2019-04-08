@@ -19,6 +19,7 @@ li {
 @media (max-width: 600px) {
   #market-grid-container {
     display: grid;
+    /* grid-template-columns: 35% 65%; */
     grid-gap: 1px;
     margin:8px;
   }

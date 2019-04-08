@@ -1,7 +1,7 @@
 import { Injectable, ErrorHandler } from '@angular/core';
 import { HttpClientModule, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse} from '@angular/common/http';
 
-import { Observable, of, Subject, BehaviorSubject, timer, zip } from 'rxjs';
+import { Observable, of, Subject, BehaviorSubject, timer, zip, throwError } from 'rxjs';
 import { catchError, map, tap, debounceTime, distinctUntilChanged, switchMap, share, finalize, retry } from 'rxjs/operators';
 
 import { DataProviderService } from './data-provider.service';
@@ -56,7 +56,7 @@ export class InterceptorService implements HttpInterceptor {
       retry(3),
       catchError((err) => {
         this.handleAuthError(err);
-        return Observable.throw(err);
+        return throwError(err);
       }),
       map(event => {
         return event;

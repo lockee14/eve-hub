@@ -12,21 +12,21 @@ import { catchError } from 'rxjs/operators';
 */
 export class ApiHandlerService {
 
-  // for ng serve only
-  // private marketGroupIDUrl = 'api/market/'; // "api/market/"
-  // private userDataUrl = 'api/charactereId/';
-  // private refreshTokenUrl = 'api/refreshToken/';
-  // private searchUrl = 'api/search/';
-  // private searchListUrl = 'api/searchItemsList/';
-  // private structureUrl = 'api/structure/';
+  // for ng serve and ng test only
+  public marketGroupIDUrl = 'api/market/'; // "api/market/"
+  public userDataUrl = 'api/charactereId/';
+  public refreshTokenUrl = 'api/refreshToken/';
+  public searchUrl = 'api/search/';
+  public searchListUrl = 'api/searchItemsList/';
+  public structureUrl = 'api/structure/';
 
   // for ng build:
-  private marketGroupIDUrl = 'market/';
-  private userDataUrl = 'charactereId/';
-  private refreshTokenUrl = 'refreshToken/';
-  private searchUrl = 'search/';
-  private searchListUrl = 'searchItemsList/';
-  private structureUrl = 'structure/';
+  // private marketGroupIDUrl = 'market/';
+  // private userDataUrl = 'charactereId/';
+  // private refreshTokenUrl = 'refreshToken/';
+  // private searchUrl = 'search/';
+  // private searchListUrl = 'searchItemsList/';
+  // private structureUrl = 'structure/';
 
   constructor(private http: HttpClient) { }
 

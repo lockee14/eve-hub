@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, ViewEncapsulation } from '@angular/core';
+// import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormControl } from '@angular/forms';
 
 import { Observable, Subject, Subscription, observable, BehaviorSubject, zip } from 'rxjs';
@@ -40,6 +41,8 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   constructor(
     private apiHandlerService: ApiHandlerService,
+    // private route: ActivatedRoute,
+    // private router: Router,
     private sharedMarketDataService: SharedMarketDataService,
     private overlay: Overlay,
     private marketService: MarketService,
@@ -85,7 +88,7 @@ export class ContentComponent implements OnInit, OnDestroy {
           const obs1 = this.marketService.getMarketsRegionIdHistory(params.regionId, params.itemId);
           const obs2 = this.marketService.getMarketsRegionIdOrders('all', params.regionId, undefined, undefined, undefined, params.itemId);
           if (this.i18n_regions.hasOwnProperty(~~params.regionId)) {
-            setTimeout(() => this.i18n_selectedRegion = ~~params.regionId);
+            setTimeout(() => this.i18n_selectedRegion = ~~params.regionId); // sert à eviter ExpressionChangedAfterItHasBeenCheckedError
           }
           return zip(obs1, obs2);
         } else {
