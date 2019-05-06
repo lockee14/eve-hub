@@ -19,6 +19,7 @@ export class ApiHandlerService {
   public searchUrl = 'api/search/';
   public searchListUrl = 'api/searchItemsList/';
   public structureUrl = 'api/structure/';
+  public marketItemUrl = 'api/marketItem/';
 
   // for ng build:
   // private marketGroupIDUrl = 'market/';
@@ -27,6 +28,8 @@ export class ApiHandlerService {
   // private searchUrl = 'search/';
   // private searchListUrl = 'searchItemsList/';
   // private structureUrl = 'structure/';
+  // private marketItemUrl = 'marketItem/';
+
 
   constructor(private http: HttpClient) { }
 
@@ -58,6 +61,10 @@ export class ApiHandlerService {
     } else {
       return this.http.get<any>(this.marketGroupIDUrl + parentId);
     }
+  }
+
+  getMarketItem(itemId): Observable<any> {
+    return this.http.get<any>(this.marketItemUrl + itemId);
   }
 
   getUserData(access_token): Observable<any> {

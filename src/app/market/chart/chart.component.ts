@@ -45,7 +45,8 @@ export class ChartComponent implements OnInit, OnDestroy {
   }
 
   fetchData(): void {
-    const data = this.sharedMarketDataService.marketHistory$.pipe(filter(x => x !== null), distinctUntilChanged());
+    // const data = this.sharedMarketDataService.marketHistory$.pipe(filter(x => x !== null), distinctUntilChanged()); // pourquoi distinctUntilChanged()?
+    const data = this.sharedMarketDataService.marketHistory$.pipe(filter(x => x !== null));
     const lang = this.dataProviderService.lang$;
     const sub = combineLatest(data, lang).subscribe(([d, l]) => {
       this.supercontenaire.innerHTML = '';

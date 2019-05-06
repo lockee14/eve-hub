@@ -1,4 +1,12 @@
 export const i18n_REGIONS: any = {
+    '10000000' : {
+        'de': 'Alle Regionen',
+        'en-us': 'All regions',
+        'fr': 'Toutes les régions',
+        'ja': '全地域',
+        'ru': 'все регионы',
+        'zh': '所有地区'
+    },
    '10000001': {
         'de': 'Derelik',
         'en-us': 'Derelik',

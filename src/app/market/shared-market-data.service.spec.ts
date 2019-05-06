@@ -41,10 +41,30 @@ describe('SharedMarketDataService', () => {
   it('setMarketHistory() should change the MarketHistory', (done: DoneFn) => {
     const service: SharedMarketDataService = TestBed.get(SharedMarketDataService);
     spyOn(service, 'setMarketHistory').and.callThrough();
-    service.setMarketHistory('test');
+    const fakeData =  [
+      {
+        average: 100,
+        date: '12/05/2019',
+        highest: 150,
+        lowest: 50,
+        order_count: 10,
+        volume: 20
+      },
+      {
+        average: 100,
+        date: '13/05/2019',
+        highest: 150,
+        lowest: 50,
+        order_count: 10,
+        volume: 20
+      }
+    ];
+    // service.setMarketHistory('test');
+    service.setMarketHistory(fakeData);
     expect(service.setMarketHistory).toHaveBeenCalled();
     service.marketHistory$.subscribe(data => {
-      expect(data).toBe('test');
+      // expect(data).toBe('test');
+      expect(data).toBe(fakeData);
       done();
     });
   });

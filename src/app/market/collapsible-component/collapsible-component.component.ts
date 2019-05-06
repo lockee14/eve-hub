@@ -41,7 +41,8 @@ export class CollapsibleComponentComponent implements OnInit {
   }
 
   getMarketGroup(parentId): void {
-    this.apiHandlerService.getMarketGroup(parentId)
+    this.apiHandlerService.getMarketGroup(parentId).pipe(
+    )
     .subscribe(data => this.marketGroups = data);
   }
 

@@ -14,7 +14,8 @@ import { i18n_REGIONS } from '../../i18n_regions-list';
 })
 export class AppraisalContentComponent implements OnInit, OnDestroy {
   private subscription: Subscription[] = [];
-  public i18n_regions = i18n_REGIONS;
+  // public i18n_regions = i18n_REGIONS;
+  public i18n_regions = JSON.parse(JSON.stringify(i18n_REGIONS)); // temporary solution before implementing all regions in the backend
   public i18n_selectedRegion: number = 10000002;
   private appraisal: string = '';
   public contentError = new BehaviorSubject({error: false, type: ''});
@@ -29,6 +30,7 @@ export class AppraisalContentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.lang = this.dataProviderService.lang;
+    delete this.i18n_regions['10000000']; // temporary solution before implementing all regions in the backend
     const sub = this.route.firstChild.paramMap.subscribe((params: ParamMap) => {
       if (params.get('hash')) {
         this.appraisalService.getOldAppraisal(params.get('hash'));

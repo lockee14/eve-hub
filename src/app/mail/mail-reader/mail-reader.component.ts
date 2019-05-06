@@ -167,15 +167,11 @@ export class MailReaderComponent implements OnInit, OnDestroy {
     });
     regex = /((http|ftp|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
     body = body.replace(/<a href="\S+">/g, function(match) {
-      if (regex.test(match)) {
-        return match;
-      } else {
-        return '';
-      }
+      match = match.replace(/(?:=)(http|ftp|https)/g, (m, p1) => p1); // apparament ça fonctionne
+      return regex.test(match) ? match : '';
     });
-    // (?<=<)url(?==(((http|ftp|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))>) // old
-    // (?:<)(url)(?==(((http|ftp|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))>) // new
-    regex = /(?:<)(url)(?==(((http|ftp|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))>)/g;
+    // regex = /(?:<)(url)(?==(((http|ftp|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))>)/g;
+    regex = /(?:<)(url=)(?=(((http|ftp|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))>)/g;
     // body = body.replace(/(?<=<)url=(?=\S+>)/g, 'a href=');
     body = body.replace(regex, '<a href='/*'a href='*/);
     // (?<=<\/)url(?=>) // old

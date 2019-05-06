@@ -55,13 +55,7 @@ describe('ContentComponent', () => {
         MaterialDesignModule,
         FormsModule,
         ReactiveFormsModule,
-        TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
-            deps: [HttpClientTestingModule]
-          }
-        }),
+        TranslateModule.forRoot(),
         RouterTestingModule.withRoutes([
             { path: 'market',
             children: [

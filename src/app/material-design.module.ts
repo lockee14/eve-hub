@@ -26,6 +26,7 @@ import { HttpClient } from '@angular/common/http';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core'; // my translation service for i18n
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -58,6 +59,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatSnackBarModule,
     MatMenuModule,
     MatProgressSpinnerModule,
+    MatPaginatorModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -89,6 +91,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatMenuModule,
     SecurityLevelColor,
     MatProgressSpinnerModule,
+    MatPaginatorModule,
     TranslateModule
   ],
 })

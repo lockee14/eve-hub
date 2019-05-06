@@ -114,7 +114,6 @@ export class NewMailComponent implements OnInit, OnDestroy {
     });
 
     function recipientLength(subject: FormGroup) {
-      // console.log(subject, subject.value, subject.get('subject'));
       const rec = subject.value.split(',');
       if (rec.length > 50) {
         return {'recipientTooLong': true};
@@ -124,7 +123,6 @@ export class NewMailComponent implements OnInit, OnDestroy {
     }
 
     function subjectLength(subject: FormGroup) {
-      // console.log(subject, subject.value, subject.get('subject'));
       if (subject.value.length >= 1000) {
         return {'subjectTooLong': true};
       } else {

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import {PortalModule} from '@angular/cdk/portal';
 
-import { ContentComponent } from './content/content.component';
+import { ContentComponent, DialogInfoComponent } from './content/content.component';
 import { CollapsibleComponentComponent } from './collapsible-component/collapsible-component.component';
 import { MarketRoutingModule } from './market-routing.module';
 
@@ -26,10 +26,14 @@ import { SellComponent } from './sell/sell.component';
   ],
   declarations: [
     ContentComponent,
+    DialogInfoComponent,
     CollapsibleComponentComponent,
     ChartComponent,
     BuyComponent,
     SellComponent
+  ],
+  entryComponents: [
+    DialogInfoComponent
   ]
 })
 export class MarketModule { }

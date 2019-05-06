@@ -1,0 +1,14 @@
+<div>
+    <button id='close-cross' mat-button mat-icon-button (click)="onNoClick()"><mat-icon>close</mat-icon></button>
+    <div id=item>
+        <img *ngIf="data.iconID; else imgElseBlock" border="0" alt="item" src="/assets/image/image_64/{{data.iconID}}.png">
+        <ng-template #imgElseBlock><img border="0" alt="item" src="/assets/image/image_64/0.png"></ng-template>
+        <p>
+            {{data.name[lang$ | async]}}
+            <br> volume: {{data.volume}}
+        </p>
+    </div>
+    <div id='description' [innerHTML]="markupParser(data.description[lang$ | async])">
+    </div>
+    <button i18n="@@aboutClose" id='close-button' mat-button (click)="onNoClick()">{{'aboutClose' | translate}}</button>
+</div>

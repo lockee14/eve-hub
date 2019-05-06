@@ -28,13 +28,31 @@
 
   </div>
   <div id=right-part>
-    <div *ngIf="childItem|async; else elseBlock">
+    <!-- <div *ngIf="childItem|async; else elseBlock"> -->
+    <div *ngIf="childItem$|async as item; else elseBlock">
       <nav mat-tab-nav-bar>
         <a i18n="@@marketTab1" mat-tab-link routerLink="chart/{{childRegion|async}}/{{childItem|async}}">{{'marketTab1' | translate}}</a>
         <a i18n="@@marketTab2" mat-tab-link routerLink="buy/{{childRegion|async}}/{{childItem|async}}">{{'marketTab2' | translate}}</a>
         <a i18n="@@marketTab3" mat-tab-link routerLink="sell/{{childRegion|async}}/{{childItem|async}}">{{'marketTab3' | translate}}</a>
       </nav>
+      <div id=item>
+        <!-- <img id="img-cont" border="0" alt="market_item" src="/assets/image/image_64/{{item[0].iconID}}.png"> -->
+        <img *ngIf="item[0].iconID; else imgElseBlock" border="0" alt="item" src="/assets/image/image_64/{{item[0].iconID}}.png">
+        <ng-template #imgElseBlock><img border="0" alt="item" src="/assets/image/image_64/0.png"></ng-template>
+        <p>
+          {{item[0].name[lang$ | async]}}
+          <button mat-icon-button (click)="openInfoDialog(item[0])">
+            <mat-icon>help_outline</mat-icon>
+          </button>
+          <br> volume: {{item[0].volume}}
+        </p>
+      </div>
+      <!-- <div>{{item[0].name[lang$ | async]}} <br> volume: {{item[0].volume}}</div> -->
     </div>
+    <!-- <div *ngIf="childItem$|async as item">
+        <div><img id="img-cont" border="0" alt="market_item" src="/assets/image/image_64/{{item[0].iconID}}.png"></div>
+        <div>{{item[0].name[lang$ | async]}} <br> volume: {{item[0].volume}}</div>
+    </div> -->
     <ng-template #elseBlock>
       <nav mat-tab-nav-bar>
         <a i18n="@@reMarketTab1" mat-tab-link>{{'marketTab1' | translate}}</a>
