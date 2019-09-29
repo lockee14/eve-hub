@@ -1,4 +1,9 @@
-# EveOnlineApp
+# eve-hub
+
+Here is the front-end part of my website [https://eve-hub.com](https://eve-hub.com).
+This website is intended to eve online players and provide them data about the game, mainly market data and in-game mail.
+
+It's also fully translated for 6 languages which are: english, french, german, chinese, japanese and russian.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.5.
 
